@@ -167,15 +167,12 @@ const Whiteboard: React.FC<WhiteboardProps> = ({
       if (!data) {
         console.log('Whiteboard missing, creating...', effectiveWhiteboardId);
 
-        // ✅ IMPORTANT:
-        // If your table uses "owner_id" instead of "user_id",
-        // change this line to owner_id: userId
         const { error: insertError } = await supabase
           .from('whiteboards')
           .insert({
             id: effectiveWhiteboardId,
             title: 'My Whiteboard',
-            owner_id: userId
+            user_id: userId
           });
 
         if (insertError) {
