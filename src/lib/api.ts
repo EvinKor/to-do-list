@@ -10,13 +10,10 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
   const apiBase = envBase.startsWith('/')
     ? `${window.location.origin}${envBase}`
     : envBase || window.location.origin;
-  const apiToken = (import.meta as any).env?.VITE_API_TOKEN as string | undefined;
-
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     ...(options.headers as Record<string, string> | undefined),
   };
-  if (apiToken) headers.Authorization = `Bearer ${apiToken}`;
 
   const method = (options.method || 'GET').toUpperCase();
   let data: any = undefined;
